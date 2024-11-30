@@ -9,7 +9,7 @@ import { NativeItem, NativeList, NativeText } from "@/components/Global/NativeCo
 import { useCurrentAccount } from "@/stores/account";
 import MissingItem from "@/components/Global/MissingItem";
 import BottomSheet from "@/components/Modals/PapillonBottomSheet";
-import { Trash2 } from "lucide-react-native";
+import { Trash2, ArrowDownCircle, ArrowUpCircle } from "lucide-react-native";
 import ColorIndicator from "@/components/Lessons/ColorIndicator";
 import { COLORS_LIST } from "@/services/shared/Subject";
 import type { Screen } from "@/router/helpers/types";
@@ -118,30 +118,84 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity
-          onPress={() => {
-            Alert.alert(
-              "Réinitialiser les matières",
-              "Voulez-vous vraiment réinitialiser les matières ?",
-              [
-                { text: "Annuler", style: "cancel" },
-                { text: "Réinitialiser", style: "destructive", onPress: () => {
-                  setSubjects([]);
-                  setLocalSubjects([]);
-                  setCurrentTitle("");
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
 
-                  mutateProperty("personalization", {
-                    ...account.personalization,
-                    subjects: {},
-                  });
-                }},
-              ]
-            );
-          }}
-          style={{ marginRight: 2 }}
-        >
-          <Trash2 size={22} color={colors.primary} />
-        </TouchableOpacity>
+          {/* Bouton exporter */}
+          <TouchableOpacity
+            onPress={() => {
+              Alert.alert(
+                "Exporter",
+                "Exporter les couleurs actuelles vers la presse papier ?",
+                [
+                  { text: "Annuler", style: "cancel" },
+                  {
+                    text: "Exporter",
+                    style: "destructive",
+                    onPress: () => {
+                      console.log("copié dans la presse papier (c fo)");
+                    }
+                  },
+                ]
+              ); // Alerte qui s'affiche quand vous appuyez sur le bouton
+            }}
+            style={{ marginRight: 10 }} // Marge pour séparer du bouton poubelle
+          >
+            <ArrowUpCircle size={22} color={colors.primary} />
+          </TouchableOpacity>
+
+          {/* Bouton importer */}
+          <TouchableOpacity
+            onPress={() => {
+              Alert.alert(
+                "Importer",
+                "Importer une table de couleurs depuis la presse papier ?",
+                [
+                  { text: "Annuler", style: "cancel" },
+                  {
+                    text: "Importer",
+                    style: "destructive",
+                    onPress: () => {
+                      console.log("a choisi un fichier");
+                    }
+                  },
+                ]
+              ); // Alerte qui s'affiche quand vous appuyez sur le bouton
+            }}
+            style={{ marginRight: 10 }} // Marge pour séparer du bouton poubelle
+          >
+            <ArrowDownCircle size={22} color={colors.primary} />
+          </TouchableOpacity>
+
+          {/* Bouton poubelle */}
+          <TouchableOpacity
+            onPress={() => {
+              Alert.alert(
+                "Réinitialiser les matières",
+                "Voulez-vous vraiment réinitialiser les matières ?",
+                [
+                  { text: "Annuler", style: "cancel" },
+                  {
+                    text: "Réinitialiser",
+                    style: "destructive",
+                    onPress: () => {
+                      setSubjects([]);
+                      setLocalSubjects([]);
+                      setCurrentTitle("");
+
+                      mutateProperty("personalization", {
+                        ...account.personalization,
+                        subjects: {},
+                      });
+                    }
+                  },
+                ]
+              );
+            }}
+            style={{ marginRight: 2 }}
+          >
+            <Trash2 size={22} color={colors.primary} />
+          </TouchableOpacity>
+        </View>
       ),
     });
   }, [navigation, colors.primary]);
