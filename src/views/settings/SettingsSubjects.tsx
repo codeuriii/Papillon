@@ -70,6 +70,15 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
     });
   };
 
+  const  isJsonable = (str_test: string) => {
+    try {
+      JSON.parse(str_test);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+
   const debouncedUpdateSubject = useMemo(
     () => debounce((subjectKey: string, updates: Partial<Item[1]>) => {
       updateSubject(subjectKey, updates);
@@ -172,7 +181,9 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                     onPress: () => {
                       const getClipboard = async () => {
                         const result = await Clipboard.getStringAsync();
-                        setSubjectsFromJson(JSON.parse(result));
+                        if (isJsonable(result)) {
+                          setSubjectsFromJson(JSON.parse(result));
+                        }
                       };
                       getClipboard();
                     }
