@@ -25,6 +25,7 @@ type Item = [key: string, value: { color: string; pretty: string; emoji: string;
 
 const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
   const account = useCurrentAccount(store => store.account!);
+  const subjects_for_copy = account.personalization.subjects;
   const mutateProperty = useCurrentAccount(store => store.mutateProperty);
   const insets = useSafeAreaInsets();
   const colors = useTheme().colors;
@@ -58,6 +59,16 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
       )
     );
   }, []);
+
+  const setSubjectsFromJson = (json: { [key: string]: { color: string; pretty: string; emoji: string; } }) => {
+    const newSubjects: Item[] = Object.entries(json) as Item[];
+    setSubjects(newSubjects);
+    setLocalSubjects(newSubjects);
+    mutateProperty("personalization", {
+      ...account.personalization,
+      subjects: json,
+    });
+  };
 
   const debouncedUpdateSubject = useMemo(
     () => debounce((subjectKey: string, updates: Partial<Item[1]>) => {
@@ -136,7 +147,7 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                       const writeToClipboard = async (text: string) => {
                         await Clipboard.setStringAsync(text);
                       };
-                      writeToClipboard("test copié depuis papillon");
+                      writeToClipboard(JSON.stringify(subjects_for_copy));
                     }
                   },
                 ]
@@ -161,6 +172,7 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                     onPress: () => {
                       const getClipboard = async () => {
                         const result = await Clipboard.getStringAsync();
+                        setSubjectsFromJson(JSON.parse(result));
                       };
                       getClipboard();
                     }
