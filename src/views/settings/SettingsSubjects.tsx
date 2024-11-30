@@ -14,6 +14,7 @@ import ColorIndicator from "@/components/Lessons/ColorIndicator";
 import { COLORS_LIST } from "@/services/shared/Subject";
 import type { Screen } from "@/router/helpers/types";
 import SubjectContainerCard from "@/components/Settings/SubjectContainerCard";
+import * as Clipboard from "expo-clipboard";
 
 const MemoizedNativeItem = React.memo(NativeItem);
 const MemoizedNativeList = React.memo(NativeList);
@@ -132,7 +133,10 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                     text: "Exporter",
                     style: "destructive",
                     onPress: () => {
-                      console.log("copié dans la presse papier (c fo)");
+                      const writeToClipboard = async (text: string) => {
+                        await Clipboard.setStringAsync(text);
+                      };
+                      writeToClipboard("test copié depuis papillon");
                     }
                   },
                 ]
@@ -155,7 +159,10 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                     text: "Importer",
                     style: "destructive",
                     onPress: () => {
-                      console.log("a choisi un fichier");
+                      const getClipboard = async () => {
+                        const result = await Clipboard.getStringAsync();
+                      };
+                      getClipboard();
                     }
                   },
                 ]
