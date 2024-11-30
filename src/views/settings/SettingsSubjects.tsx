@@ -25,7 +25,7 @@ type Item = [key: string, value: { color: string; pretty: string; emoji: string;
 
 const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
   const account = useCurrentAccount(store => store.account!);
-  const subjects_for_copy = account.personalization.subjects;
+  const subjectsForCopy = account.personalization.subjects;
   const mutateProperty = useCurrentAccount(store => store.mutateProperty);
   const insets = useSafeAreaInsets();
   const colors = useTheme().colors;
@@ -70,9 +70,9 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
     });
   };
 
-  const  isJsonable = (str_test: string) => {
+  const  isJsonable = (strTest: string) => {
     try {
-      JSON.parse(str_test);
+      JSON.parse(strTest);
       return true;
     } catch (e) {
       return false;
@@ -156,7 +156,7 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                       const writeToClipboard = async (text: string) => {
                         await Clipboard.setStringAsync(text);
                       };
-                      writeToClipboard(JSON.stringify(subjects_for_copy));
+                      writeToClipboard(JSON.stringify(subjectsForCopy));
                     }
                   },
                 ]
