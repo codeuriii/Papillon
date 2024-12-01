@@ -172,7 +172,7 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
             onPress={() => {
               Alert.alert(
                 "Importer",
-                "Importer une table de couleurs depuis la presse papier ?",
+                "Importer une table de couleurs depuis le presse papier ?",
                 [
                   { text: "Annuler", style: "cancel" },
                   {
