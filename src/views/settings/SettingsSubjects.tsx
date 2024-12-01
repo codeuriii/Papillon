@@ -146,7 +146,7 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
             onPress={() => {
               Alert.alert(
                 "Exporter",
-                "Exporter les couleurs actuelles vers la presse papier ?",
+                "Exporter les couleurs actuelles vers le presse papier ?",
                 [
                   { text: "Annuler", style: "cancel" },
                   {
