@@ -1,10 +1,11 @@
 import type { Screen } from "@/router/helpers/types";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Alert, Image, Platform, Text, View } from "react-native";
+import { Alert, Image, Platform, Text, View, NativeModules } from "react-native";
 import { useAccounts, useCurrentAccount } from "@/stores/account";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as WebBrowser from "expo-web-browser";
 import AppJSON from "../../../app.json";
+const { IconChangerModule } = NativeModules;
 
 import Reanimated, {
   FadeIn,
@@ -19,6 +20,7 @@ import Reanimated, {
 import {
   Bell,
   Cable,
+  Car,
   HandCoins,
   Info,
   Laptop,
@@ -134,6 +136,15 @@ const Settings: Screen<"Settings"> = ({ route, navigation }) => {
           label: "Icône de l'application",
           onPress: () => navigation.navigate("SettingsIcons"),
           android: false,
+        },
+        {
+          icon: <Car />,
+          color: "#000000",
+          label: "Test",
+          onPress: () => {
+            console.log(NativeModules);
+            IconChangerModule.changeIcon("com.example.MainActivityDefault", "com.example.MainActivityBeach");
+          },
         },
         {
           icon: <Palette />,

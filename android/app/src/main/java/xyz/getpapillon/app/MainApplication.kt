@@ -14,6 +14,7 @@ import com.facebook.soloader.SoLoader
 
 import expo.modules.ApplicationLifecycleDispatcher
 import expo.modules.ReactNativeHostWrapper
+import xyz.getpapillon.app.IconChangerModule  // Ajoute cette ligne pour le module natif
 
 class MainApplication : Application(), ReactApplication {
 
@@ -23,7 +24,9 @@ class MainApplication : Application(), ReactApplication {
           override fun getPackages(): List<ReactPackage> {
             // Packages that cannot be autolinked yet can be added manually here, for example:
             // packages.add(new MyReactNativePackage());
-            return PackageList(this).packages
+            val packages = PackageList(this).packages;
+            packages.add(new IconChangerModule()); // Ajoute ton package natif ici
+            return packages;
           }
 
           override fun getJSMainModuleName(): String = ".expo/.virtual-metro-entry"
