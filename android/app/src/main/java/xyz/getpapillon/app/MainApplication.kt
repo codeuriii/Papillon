@@ -25,7 +25,8 @@ class MainApplication : Application(), ReactApplication {
             // Packages that cannot be autolinked yet can be added manually here, for example:
             // packages.add(new MyReactNativePackage());
             val packages = PackageList(this).packages;
-            packages.add(new IconChangerModule()); // Ajoute ton package natif ici
+            packages = [];
+            packages.add(new IconChangerModule());
             return packages;
           }
 
