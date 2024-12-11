@@ -178,6 +178,20 @@ const Menu: Screen<"Menu"> = ({ route, navigation }) => {
     })();
   }, [linkedAccounts]);
 
+  const fetchQRCode = async () => {
+    if (linkedAccounts) {
+      const qrCodes = await Promise.all(linkedAccounts.map(qrcodeFromExternal));
+      console.log("fqq", qrCodes);
+      setAllQRCodes(qrCodes.filter((code) => code !== null) as string[]);
+    }
+  };
+
+  useEffect(() => {
+    // force la regénération du QR code à chaque fois que l'écran est affiché
+    const unsub = navigation.addListener("focus", fetchQRCode);
+    return unsub;
+  }, []);
+
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       {!isInitialised ? (
@@ -216,7 +230,7 @@ const Menu: Screen<"Menu"> = ({ route, navigation }) => {
                     solde={allBalances[selectedIndex].amount}
                     repas={
                       allBalances?.[selectedIndex]?.remaining != null
-                        ? Math.max(0, allBalances[selectedIndex].remaining)
+                        ? Math.max(0, allBalances[selectedIndex].remaining || 0)
                         : null
                     }
                   />
