@@ -150,7 +150,7 @@ const Settings: Screen<"Settings"> = ({ route, navigation }) => {
         {
           icon: <CheckSquare />,
           color: "#4947E6FF",
-          label: "Icône \"check\" devoirs",
+          label: "Devoirs",
           onPress: () => navigation.navigate("SettingsCheck"),
         },
       ],
