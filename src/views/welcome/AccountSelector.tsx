@@ -18,6 +18,7 @@ import {useSafeAreaInsets} from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
 
 import PapillonAvatar from "@/components/Global/PapillonAvatar";
+import PapillonCheckbox from "@/components/Global/PapillonCheckbox";
 
 import PackageJSON from "@/../package.json";
 
