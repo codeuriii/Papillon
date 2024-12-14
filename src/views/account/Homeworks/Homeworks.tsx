@@ -463,7 +463,7 @@ const WeekView: Screen<"Homeworks"> = ({ route, navigation }) => {
                   </Reanimated.View>
                 }
 
-                {!showPickerButtons && hideDone &&
+                {!showPickerButtons && hideDone && !account.personalization.KeepCheckVisible &&
                     <Reanimated.View
                       entering={animPapillon(ZoomIn)}
                       exiting={animPapillon(FadeOut)}
