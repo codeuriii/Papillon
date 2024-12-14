@@ -107,18 +107,13 @@ const WeekView: Screen<"Homeworks"> = ({ route, navigation }) => {
 
   const [hideDone, setHideDone] = useState(false);
   useEffect(() => {
-    // Met à jour l'état si la valeur existe
     const keeyActivated =
       account.personalization.KeepCheckActivated === true
         ? true
         : false;
 
     setHideDone(keeyActivated);
-    console.log("keeyActivated:", keeyActivated);
-  }, [account.personalization.KeepCheckActivated]); // L'effet est déclenché uniquement quand cette valeur change.
-
-  console.log("hideDone:", hideDone);
-  console.log("account.personalization.KeepCheckActivated:", account.personalization.KeepCheckActivated);
+  }, [account.personalization.KeepCheckActivated]);
 
 
   const getItemLayout = useCallback((_: any, index: number) => ({

@@ -28,8 +28,6 @@ const SettingsCheck: Screen<"SettingsCheck"> = ({ navigation }) => {
               value={account?.personalization?.KeepCheckActivated ?? false}
               onValueChange={(value) => {
                 mutateProperty("personalization", { KeepCheckActivated: value });
-                console.log(value);
-                console.log(account?.personalization.KeepCheckActivated);
               }}
             />
           }
