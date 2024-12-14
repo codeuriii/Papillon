@@ -34,7 +34,7 @@ const SettingsCheck: Screen<"SettingsCheck"> = ({ navigation }) => {
           leading={
             <NativeIconGradient
               icon={<CheckSquare />}
-              colors={["#04ACDC", "#6FE3CD"]}
+              colors={["#FF8FA3", "#E63946"]}
             />
           }
         >
@@ -55,7 +55,7 @@ const SettingsCheck: Screen<"SettingsCheck"> = ({ navigation }) => {
           leading={
             <NativeIconGradient
               icon={<Search />}
-              colors={["#FFD700", "#FF8C00"]}
+              colors={["#A8E063", "#56AB2F"]}
             />
           }
         >
