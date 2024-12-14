@@ -42,7 +42,7 @@ const SettingsCheck: Screen<"SettingsCheck"> = ({ navigation }) => {
             Devoirs non-faits
           </NativeText>
           <NativeText variant="subtitle">
-            Activer par défaut le fait d'afficher uniquement les devoirs non-faits
+            Activer l'affichage par défaut des devoirs non-faits uniquement
           </NativeText>
         </NativeItem>
         <NativeItem
@@ -63,7 +63,7 @@ const SettingsCheck: Screen<"SettingsCheck"> = ({ navigation }) => {
             Garder visible
           </NativeText>
           <NativeText variant="subtitle">
-            Garder visible dans la barre du haut a coté du champ de recherche
+            Garder visible l'icône de bascule tous les devoirs / devoirs non-faits
           </NativeText>
         </NativeItem>
       </NativeList>
