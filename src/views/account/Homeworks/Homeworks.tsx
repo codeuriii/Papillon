@@ -106,6 +106,20 @@ const WeekView: Screen<"Homeworks"> = ({ route, navigation }) => {
   const [oldSelectedWeek, setOldSelectedWeek] = useState(selectedWeek);
 
   const [hideDone, setHideDone] = useState(false);
+  useEffect(() => {
+    // Met à jour l'état si la valeur existe
+    const keeyActivated =
+      account.personalization.KeepCheckActivated === true
+        ? true
+        : false;
+
+    setHideDone(keeyActivated);
+    console.log("keeyActivated:", keeyActivated);
+  }, [account.personalization.KeepCheckActivated]); // L'effet est déclenché uniquement quand cette valeur change.
+
+  console.log("hideDone:", hideDone);
+  console.log("account.personalization.KeepCheckActivated:", account.personalization.KeepCheckActivated);
+
 
   const getItemLayout = useCallback((_: any, index: number) => ({
     length: finalWidth,
@@ -547,7 +561,7 @@ const WeekView: Screen<"Homeworks"> = ({ route, navigation }) => {
           />
         }
 
-        {showPickerButtons && !searchHasFocus && width > 330 &&
+        {(showPickerButtons || account.personalization.KeepCheckVisible) && !searchHasFocus && width > 330 &&
         <Reanimated.View
           layout={animPapillon(LinearTransition)}
           entering={animPapillon(FadeInLeft).delay(100)}
@@ -642,8 +656,7 @@ const WeekView: Screen<"Homeworks"> = ({ route, navigation }) => {
           >
             <TextInput
               placeholder={
-                (hideDone && !searchHasFocus) ? "Non terminé" :
-                  "Rechercher"
+                (searchHasFocus || !account.personalization.KeepCheckVisible) ? "Rechercher" : ""
               }
               value={searchTerms}
               onChangeText={setSearchTerms}
