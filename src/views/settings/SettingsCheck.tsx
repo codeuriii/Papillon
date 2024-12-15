@@ -60,10 +60,10 @@ const SettingsCheck: Screen<"SettingsCheck"> = ({ navigation }) => {
           }
         >
           <NativeText variant="title">
-            Garder visible
+            Cacher l'icone
           </NativeText>
           <NativeText variant="subtitle">
-            Garder visible l'icône de tri des devoirs non-faits
+            Ranger l'icône de tri des devoirs non-faits derrière la semaine
           </NativeText>
         </NativeItem>
       </NativeList>

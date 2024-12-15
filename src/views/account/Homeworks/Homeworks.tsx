@@ -463,7 +463,7 @@ const WeekView: Screen<"Homeworks"> = ({ route, navigation }) => {
                   </Reanimated.View>
                 }
 
-                {!showPickerButtons && hideDone && !account.personalization.KeepCheckVisible &&
+                {!showPickerButtons && hideDone && account.personalization.KeepCheckVisible &&
                     <Reanimated.View
                       entering={animPapillon(ZoomIn)}
                       exiting={animPapillon(FadeOut)}
@@ -556,7 +556,7 @@ const WeekView: Screen<"Homeworks"> = ({ route, navigation }) => {
           />
         }
 
-        {(showPickerButtons || account.personalization.KeepCheckVisible) && !searchHasFocus && width > 330 &&
+        {(showPickerButtons || !account.personalization.KeepCheckVisible) && !searchHasFocus && width > 330 &&
         <Reanimated.View
           layout={animPapillon(LinearTransition)}
           entering={animPapillon(FadeInLeft).delay(100)}
@@ -652,7 +652,7 @@ const WeekView: Screen<"Homeworks"> = ({ route, navigation }) => {
           >
             <TextInput
               placeholder={
-                (searchHasFocus || !account.personalization.KeepCheckVisible) ? "Rechercher" : ""
+                (searchHasFocus || account.personalization.KeepCheckVisible) ? "Rechercher" : ""
               }
               value={searchTerms}
               onChangeText={setSearchTerms}
