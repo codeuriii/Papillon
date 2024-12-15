@@ -63,7 +63,7 @@ const SettingsCheck: Screen<"SettingsCheck"> = ({ navigation }) => {
             Garder visible
           </NativeText>
           <NativeText variant="subtitle">
-            Garder visible l'icône de bascule tous les devoirs / devoirs non-faits
+            Garder visible l'icône de tri des devoirs non-faits
           </NativeText>
         </NativeItem>
       </NativeList>
