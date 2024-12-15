@@ -15,6 +15,7 @@ import { COLORS_LIST } from "@/services/shared/Subject";
 import type { Screen } from "@/router/helpers/types";
 import SubjectContainerCard from "@/components/Settings/SubjectContainerCard";
 import * as Clipboard from "expo-clipboard";
+import * as FileSystem from "expo-file-system";
 
 const MemoizedNativeItem = React.memo(NativeItem);
 const MemoizedNativeList = React.memo(NativeList);
@@ -146,11 +147,21 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
             onPress={() => {
               Alert.alert(
                 "Exporter",
-                "Exporter les couleurs actuelles vers le presse papier ?",
+                "Exporter les couleurs actuelles ?",
                 [
                   { text: "Annuler", style: "cancel" },
                   {
-                    text: "Exporter",
+                    text: "Presse papier",
+                    style: "destructive",
+                    onPress: () => {
+                      const writeToClipboard = async (text: string) => {
+                        await Clipboard.setStringAsync(text);
+                      };
+                      writeToClipboard(JSON.stringify(subjectsForCopy));
+                    }
+                  },
+                  {
+                    text: "Fichier",
                     style: "destructive",
                     onPress: () => {
                       const writeToClipboard = async (text: string) => {
