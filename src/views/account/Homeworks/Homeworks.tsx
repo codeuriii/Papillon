@@ -584,6 +584,7 @@ const WeekView: Screen<"Homeworks"> = ({ route, navigation }) => {
               setHideDone(!hideDone);
             }}
             onLongPress={() => navigation.navigate("SettingStack", {view: "SettingsCheck"})}
+            delayLongPress={2000}
           >
             <CheckSquare
               size={20}
