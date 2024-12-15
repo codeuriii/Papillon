@@ -40,7 +40,7 @@ const settingsScreens = [
     headerTitle: "Trophées",
   }),
   createScreen("SettingsCheck", SettingsCheck, {
-    headerTitle: "Check",
+    headerTitle: "Devoirs",
   }),
   createScreen("SettingsProfile", SettingsProfile, {
     headerTitle: "Profil",
