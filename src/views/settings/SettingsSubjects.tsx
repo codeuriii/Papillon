@@ -164,10 +164,32 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                     text: "Fichier",
                     style: "destructive",
                     onPress: () => {
-                      const writeToClipboard = async (text: string) => {
-                        await Clipboard.setStringAsync(text);
+                      const saveFile = async (text: string) => {
+                        try {
+                          // Demande à l'utilisateur de choisir un dossier
+                          const permissions = await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
+                          if (!permissions.granted) {
+                            Alert.alert("Permission refusée", "Impossible d'accéder au dossier.");
+                            return;
+                          }
+                          const fileContent = text;
+                          const fileName = "papillon_colors.json";
+                          await FileSystem.StorageAccessFramework.createFileAsync(
+                            permissions.directoryUri,
+                            fileName,
+                            "application/json"
+                          ).then(async (uri) => {
+                            await FileSystem.writeAsStringAsync(uri, fileContent, {
+                              encoding: FileSystem.EncodingType.UTF8,
+                            });
+                            Alert.alert("Succès", "Fichier enregistré avec succès !");
+                          });
+                        } catch (error) {
+                          console.error("Erreur SAF :", error);
+                          Alert.alert("Erreur", "Impossible de sauvegarder le fichier.");
+                        }
                       };
-                      writeToClipboard(JSON.stringify(subjectsForCopy));
+                      saveFile(JSON.stringify(subjectsForCopy));
                     }
                   },
                 ]
@@ -197,6 +219,33 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                         }
                       };
                       getClipboard();
+                    }
+                  },
+                  {
+                    text: "Importer",
+                    style: "destructive",
+                    onPress: () => {
+                      const selectAndReadFile = async () => {
+                        try {
+                          const fileUri = await FileSystem.StorageAccessFramework.({
+                            multiple: false,
+                            type: "application/json",
+                          });
+                          if (!fileUri.canceled) {
+                            const uri = fileUri.assets[0].uri;
+                            const fileContent = await FileSystem.readAsStringAsync(uri, {
+                              encoding: FileSystem.EncodingType.UTF8,
+                            });
+                            console.log("Contenu du fichier :", fileContent);
+                            Alert.alert("Fichier lu", fileContent);
+                          } else {
+                            Alert.alert("Annulé", "Aucun fichier sélectionné.");
+                          }
+                        } catch (error) {
+                          console.error("Erreur lors de la sélection ou de la lecture du fichier :", error);
+                          Alert.alert("Erreur", "Impossible de lire le fichier.");
+                        }
+                      };
                     }
                   },
                 ]
