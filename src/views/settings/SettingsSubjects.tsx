@@ -16,6 +16,7 @@ import type { Screen } from "@/router/helpers/types";
 import SubjectContainerCard from "@/components/Settings/SubjectContainerCard";
 import * as Clipboard from "expo-clipboard";
 import * as FileSystem from "expo-file-system";
+import * as DocumentPicker from "expo-document-picker";
 
 const MemoizedNativeItem = React.memo(NativeItem);
 const MemoizedNativeList = React.memo(NativeList);
@@ -209,7 +210,7 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                 [
                   { text: "Annuler", style: "cancel" },
                   {
-                    text: "Importer",
+                    text: "Presse papier",
                     style: "destructive",
                     onPress: () => {
                       const getClipboard = async () => {
@@ -222,30 +223,33 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                     }
                   },
                   {
-                    text: "Importer",
+                    text: "Fichier",
                     style: "destructive",
                     onPress: () => {
-                      const selectAndReadFile = async () => {
+                      const pickAndReadJsonFile = async () => {
                         try {
-                          const fileUri = await FileSystem.StorageAccessFramework.({
-                            multiple: false,
+                          const result = await DocumentPicker.getDocumentAsync({
                             type: "application/json",
                           });
-                          if (!fileUri.canceled) {
-                            const uri = fileUri.assets[0].uri;
-                            const fileContent = await FileSystem.readAsStringAsync(uri, {
-                              encoding: FileSystem.EncodingType.UTF8,
-                            });
-                            console.log("Contenu du fichier :", fileContent);
-                            Alert.alert("Fichier lu", fileContent);
-                          } else {
-                            Alert.alert("Annulé", "Aucun fichier sélectionné.");
+
+                          if (result.canceled) {
+                            console.log("Sélection annulée.");
+                            return;
                           }
-                        } catch (error) {
-                          console.error("Erreur lors de la sélection ou de la lecture du fichier :", error);
-                          Alert.alert("Erreur", "Impossible de lire le fichier.");
+                          const { uri } = result.assets[0];
+                          const fileContent = await FileSystem.readAsStringAsync(uri, {
+                            encoding: FileSystem.EncodingType.UTF8,
+                          });
+
+                          // Parser le contenu JSON
+                          if (isJsonable(fileContent)) {
+                            setSubjectsFromJson(JSON.parse(fileContent));
+                          }
+                        } catch (err) {
+                          console.error("Erreur lors de la lecture du fichier :", err);
                         }
                       };
+                      pickAndReadJsonFile();
                     }
                   },
                 ]
