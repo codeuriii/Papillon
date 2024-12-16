@@ -59,19 +59,7 @@
 
     <!-- Activity alias pour changer d'icônes dynamiquement -->
     <activity-alias
-      android:name="com.example.MainActivityDefault"
-      android:targetActivity=".MainActivity"
-      android:icon="@mipmap/ic_launcher"
-      android:roundIcon="@mipmap/ic_launcher_round"
-      android:enabled="true">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity-alias>
-
-    <activity-alias
-      android:name="com.example.MainActivityBeach"
+      android:name=".MainActivityBeach"
       android:targetActivity=".MainActivity"
       android:icon="@drawable/community_beach"
       android:roundIcon="@drawable/community_beach"
@@ -83,7 +71,7 @@
     </activity-alias>
 
     <activity-alias
-      android:name="com.example.MainActivityButter"
+      android:name=".MainActivityButter"
       android:targetActivity=".MainActivity"
       android:icon="@drawable/community_butter"
       android:roundIcon="@drawable/community_butter"
@@ -95,7 +83,7 @@
     </activity-alias>
 
     <activity-alias
-      android:name="com.example.MainActivityMoon"
+      android:name=".MainActivityMoon"
       android:targetActivity=".MainActivity"
       android:icon="@drawable/community_moon"
       android:roundIcon="@drawable/community_moon"

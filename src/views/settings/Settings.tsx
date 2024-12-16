@@ -5,7 +5,7 @@ import { useAccounts, useCurrentAccount } from "@/stores/account";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as WebBrowser from "expo-web-browser";
 import AppJSON from "../../../app.json";
-const { IconChangerModule } = NativeModules;
+import { changeIcon, getIcon, resetIcon } from "react-native-change-icon";
 
 import Reanimated, {
   FadeIn,
@@ -143,7 +143,9 @@ const Settings: Screen<"Settings"> = ({ route, navigation }) => {
           label: "Test",
           onPress: () => {
             console.log(NativeModules);
-            IconChangerModule.changeIcon("com.example.MainActivityDefault", "com.example.MainActivityBeach");
+            console.log("before");
+            changeIcon("Beach");
+            console.log("after");
           },
         },
         {
