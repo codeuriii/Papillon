@@ -209,7 +209,7 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                 ]
               ); // Alerte qui s'affiche quand vous appuyez sur le bouton
             }}
-            style={{ marginRight: 10 }} // Marge pour séparer du bouton poubelle
+            style={{ marginRight: 15 }} // Marge pour séparer du bouton poubelle
           >
             <ArrowUpCircle size={22} color={colors.primary} />
           </TouchableOpacity>
@@ -268,7 +268,7 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                 ]
               ); // Alerte qui s'affiche quand vous appuyez sur le bouton
             }}
-            style={{ marginRight: 10 }} // Marge pour séparer du bouton poubelle
+            style={{ marginRight: 15 }} // Marge pour séparer du bouton poubelle
           >
             <ArrowDownCircle size={22} color={colors.primary} />
           </TouchableOpacity>
