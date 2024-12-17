@@ -156,7 +156,6 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
       headerRight: () => (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
 
-          {/* Bouton exporter */}
           <TouchableOpacity
             onPress={() => {
               Alert.alert(
@@ -207,9 +206,9 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                     }
                   },
                 ]
-              ); // Alerte qui s'affiche quand vous appuyez sur le bouton
+              );
             }}
-            style={{ marginRight: 15 }} // Marge pour séparer du bouton poubelle
+            style={{ marginRight: 15 }}
           >
             <ArrowUpCircle size={22} color={colors.primary} />
           </TouchableOpacity>
@@ -254,7 +253,6 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                             encoding: FileSystem.EncodingType.UTF8,
                           });
 
-                          // Parser le contenu JSON
                           if (isJsonable(fileContent)) {
                             setSubjectsFromJson(JSON.parse(fileContent));
                           }
@@ -266,14 +264,13 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                     }
                   },
                 ]
-              ); // Alerte qui s'affiche quand vous appuyez sur le bouton
+              );
             }}
-            style={{ marginRight: 15 }} // Marge pour séparer du bouton poubelle
+            style={{ marginRight: 15 }}
           >
             <ArrowDownCircle size={22} color={colors.primary} />
           </TouchableOpacity>
 
-          {/* Bouton poubelle */}
           <TouchableOpacity
             onPress={() => {
               Alert.alert(
