@@ -365,7 +365,6 @@ const PronoteWebview: Screen<"PronoteWebview"> = ({ route, navigation }) => {
             }}
             onLoadEnd={(e) => {
               const { url } = e.nativeEvent;
-              console.log("Pronote webview load end", url);
 
               webViewRef.current?.injectJavaScript(
                 INJECT_PRONOTE_INITIAL_LOGIN_HOOK

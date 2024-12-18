@@ -103,8 +103,6 @@ const AlertProvider = ({ children }: AlertProviderProps) => {
     React.cloneElement(alert.icon, { color: colors.text, size: 24 }) :
     null;
 
-  console.log(finalIcon);
-
   return (
     <AlertContext.Provider value={{ showAlert }}>
       {children}
@@ -157,7 +155,9 @@ const AlertProvider = ({ children }: AlertProviderProps) => {
                   <Pressable
                     key={title}
                     onPress={() => {
-                      onPress();
+                      if (onPress) {
+                        onPress();
+                      }
                       hideAlert();
                     }}
                     style={({ pressed }) => [
