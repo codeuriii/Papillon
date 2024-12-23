@@ -23,7 +23,6 @@ import { COLORS_LIST } from "@/services/shared/Subject";
 import type { Screen } from "@/router/helpers/types";
 import SubjectContainerCard from "@/components/Settings/SubjectContainerCard";
 import { set } from "lodash";
-import * as Clipboard from "expo-clipboard";
 import * as FileSystem from "expo-file-system";
 import * as DocumentPicker from "expo-document-picker";
 
@@ -164,16 +163,6 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                 [
                   { text: "Annuler", style: "cancel" },
                   {
-                    text: "Presse papier",
-                    style: "destructive",
-                    onPress: () => {
-                      const writeToClipboard = async (text: string) => {
-                        await Clipboard.setStringAsync(text);
-                      };
-                      writeToClipboard(JSON.stringify(subjectsForCopy));
-                    }
-                  },
-                  {
                     text: "Fichier",
                     style: "destructive",
                     onPress: () => {
@@ -221,21 +210,6 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                 "Importer une table de couleurs depuis le presse papier ?",
                 [
                   { text: "Annuler", style: "cancel" },
-                  {
-                    text: "Presse papier",
-                    style: "destructive",
-                    onPress: () => {
-                      const getClipboard = async () => {
-                        const result = await Clipboard.getStringAsync();
-                        if (isJsonable(result)) {
-                          setSubjectsFromJson(JSON.parse(result));
-                        } else {
-                          Alert.alert("Erreur", "Vérifiez le contenu de la presse papier puis réessayez.");
-                        }
-                      };
-                      getClipboard();
-                    }
-                  },
                   {
                     text: "Fichier",
                     style: "destructive",
