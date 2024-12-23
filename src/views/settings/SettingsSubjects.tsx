@@ -229,6 +229,8 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
                         const result = await Clipboard.getStringAsync();
                         if (isJsonable(result)) {
                           setSubjectsFromJson(JSON.parse(result));
+                        } else {
+                          Alert.alert("Erreur", "Vérifiez le contenu de la presse papier puis réessayez.");
                         }
                       };
                       getClipboard();
@@ -255,6 +257,8 @@ const SettingsSubjects: Screen<"SettingsSubjects"> = ({ navigation }) => {
 
                           if (isJsonable(fileContent)) {
                             setSubjectsFromJson(JSON.parse(fileContent));
+                          }  else {
+                            Alert.alert("Erreur", "Vérifiez le contenu du fichier puis réessayez.");
                           }
                         } catch (err) {
                           console.error("Erreur lors de la lecture du fichier :", err);
