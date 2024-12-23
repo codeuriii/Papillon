@@ -383,7 +383,7 @@ const PronoteWebview: Screen<"PronoteWebview"> = ({ route, navigation }) => {
                     if (Platform.OS === "ios") {
                       Alert.alert(
                         "Attention",
-                        "Désolé, seules les comptes élèves sont compatibles pour le moment.",
+                        "Désolé, seuls les comptes élèves sont compatibles pour le moment.",
                         [
                           {
                             text: "OK",
@@ -395,7 +395,7 @@ const PronoteWebview: Screen<"PronoteWebview"> = ({ route, navigation }) => {
                       showAlert({
                         title: "Attention",
                         message:
-                          "Désolé, seules les comptes élèves sont compatibles pour le moment.",
+                          "Désolé, seuls les comptes élèves sont compatibles pour le moment.",
                         actions: [
                           {
                             title: "OK",

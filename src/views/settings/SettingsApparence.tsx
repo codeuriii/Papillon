@@ -42,9 +42,7 @@ const SettingsApparence: Screen<"SettingsApparence"> = () => {
         paddingBottom: insets.bottom + 16,
       }}
     >
-      <ApparenceContainerCard
-        theme={theme}
-      />
+      <ApparenceContainerCard />
 
       <NativeListHeader
         label="Mode d'affichage"
